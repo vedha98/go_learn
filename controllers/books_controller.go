@@ -18,11 +18,12 @@ type UpdateBookInput struct {
 
 func FindBooks(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
+	userId := c.MustGet("userId").(interface{})
 
 	var books []models.Book
 	db.Find(&books)
 
-	c.JSON(http.StatusOK, gin.H{"data": books})
+	c.JSON(http.StatusOK, gin.H{"data": books, "userId": userId})
 }
 
 func FindBook(c *gin.Context) {
