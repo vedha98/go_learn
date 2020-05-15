@@ -10,6 +10,8 @@ func SetupModels() *gorm.DB {
 	if err != nil {
 		panic("Failed to connect to database!")
 	}
+	// db.DB().SetMaxIdleConns(0)
+	db.DB().SetMaxOpenConns(100)
 	db.AutoMigrate(&User{}, &Book{}, &Category{})
 
 	return db
