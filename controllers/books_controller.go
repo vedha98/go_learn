@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"sync"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -9,7 +10,8 @@ import (
 )
 
 type CreateBookInput struct {
-	Title string `json:"title" binding:"required"`
+	Title      string   `json:"title" binding:"required"`
+	Categories []string `json:"categories"`
 }
 type UpdateBookInput struct {
 	Title string `json:"title"`
@@ -41,6 +43,7 @@ func CreateBook(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
 	userId := c.MustGet("userId").(interface{})
 	var user models.User
+
 	err := db.Where("id = ?", userId).First(&user).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
@@ -51,9 +54,24 @@ func CreateBook(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	book := models.Book{Title: input.Title}
-	db.Model(&user).Association("Books").Append(book)
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	var categories = []models.Category{}
+	if input.Categories != nil {
+		var wg sync.WaitGroup
+		wg.Add(len(input.Categories))
+		for _, value := range input.Categories {
+			go func(value string) {
+				defer wg.Done()
+				category := models.Category{}
+				db.FirstOrCreate(&category, models.Category{Name: value})
+				categories = append(categories, category)
+			}(value)
+		}
+		wg.Wait()
+	}
+	book := models.Book{Title: input.Title, Categories: categories}
+	db.Model(&user).Association("Books").Append(&book)
+
+	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 
 func UpdateBook(c *gin.Context) {

@@ -10,8 +10,7 @@ func SetupModels() *gorm.DB {
 	if err != nil {
 		panic("Failed to connect to database!")
 	}
-
-	db.AutoMigrate(&Book{}, &User{})
+	db.AutoMigrate(&User{}, &Book{}, &Category{})
 
 	return db
 }
