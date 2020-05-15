@@ -9,8 +9,7 @@ import (
 )
 
 type CreateBookInput struct {
-	Title  string `json:"title" binding:"required"`
-	UserID int    `json:"userId" binding:"required"`
+	Title string `json:"title" binding:"required"`
 }
 type UpdateBookInput struct {
 	Title string `json:"title"`
@@ -21,7 +20,7 @@ func FindBooks(c *gin.Context) {
 	userId := c.MustGet("userId").(interface{})
 
 	var books []models.Book
-	db.Find(&books)
+	db.Preload("User").Find(&books)
 
 	c.JSON(http.StatusOK, gin.H{"data": books, "userId": userId})
 }
@@ -40,15 +39,21 @@ func FindBook(c *gin.Context) {
 
 func CreateBook(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
+	userId := c.MustGet("userId").(interface{})
+	var user models.User
+	err := db.Where("id = ?", userId).First(&user).Error
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
+		return
+	}
 	var input CreateBookInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	book := models.Book{Title: input.Title, UserID: input.UserID}
-	db.Create(&book)
-
-	c.JSON(http.StatusOK, gin.H{"data": book})
+	book := models.Book{Title: input.Title}
+	db.Model(&user).Association("Books").Append(book)
+	c.JSON(http.StatusOK, gin.H{"data": user})
 }
 
 func UpdateBook(c *gin.Context) {

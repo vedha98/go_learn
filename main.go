@@ -22,7 +22,7 @@ func addUserRoutes(r *gin.Engine) {
 
 func addBookRoutes(r *gin.Engine) {
 	r.GET("/books", middlewares.VerifyToken(), controllers.FindBooks)
-	r.POST("/books", controllers.CreateBook)
+	r.POST("/books", middlewares.VerifyToken(), controllers.CreateBook)
 	r.GET("/books/:id", controllers.FindBook)
 	r.PATCH("/books/:id", controllers.UpdateBook)
 	r.DELETE("/books/:id")

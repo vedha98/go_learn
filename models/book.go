@@ -8,5 +8,5 @@ type Book struct {
 	ID     uint   `json:"id" gorm:"primary_key"`
 	Title  string `json:"title"`
 	UserID int
-	User   User
+	User   User `gorm:"ForeignKey:UserID"`
 }
