@@ -1,0 +1,344 @@
+.dashboard-wrap{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    position: absolute;
+    background-color: #f9f9fc;
+    overflow: hidden;
+}
+.side-wrap{
+    width: 20%;
+    background-color: rgb(14, 46, 59);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.side-item{
+    display: flex;
+    color: rgb(219, 220, 223);
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    font-weight: 200;    
+    cursor: pointer;
+    font-size: 0.7rem;
+}
+.main-dash{
+    width: 80%;
+    height: fit-content;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+.header{
+    background-color: rgb(21, 67, 87)!important;
+    padding: 1rem;
+    font-size: 0.8rem;
+    color: white;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    font-weight: 900;
+
+}
+.welcome-wrap{
+    padding: 1rem;
+    border-bottom: 1px solid #e7e7ea;
+    margin: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+.topnav-wrap{
+    display: flex;
+    flex-direction: column;
+    padding: 0.84rem;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.accounts-wrap{
+    display: flex;
+    padding: 1rem ;
+    overflow-x: scroll;
+    flex-direction: row;
+}
+.accounts-wrap::-webkit-scrollbar{
+    height: 0px;
+	background-color: #F5F5F5;
+}
+.account-card{
+    margin: 0.5rem 1rem;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    min-width: 200px;
+    border-radius: 0.2rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    cursor: pointer;
+}
+.account-card:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.account-no{
+    font-size: 0.8rem;
+}
+.account-header{
+display: flex;
+justify-content: space-between;
+color: gray;
+margin: 1rem;
+}
+.primary{
+float: right;
+color: white;
+background-color: rgba(255, 99, 71, 0.644);
+padding: 0.3rem;
+font-size: 0.6rem;
+border-radius: 0.2rem;
+}
+.account-item{
+    margin: 1rem;
+}
+.account-balance{
+    font-size: 1rem;
+}
+.account-type{
+    color: gray;
+    width: 100%;
+    font-size: 0.7rem;
+}
+.add-btn{
+    border: none;
+    outline: none;
+    background-color: #4caf50;
+    border-radius: 0.3rem;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    color: white;
+    margin: 0.1rem 1rem;
+    cursor: pointer;
+}
+.addAccount-wrap{
+    position: absolute;
+    width:100%;
+    height: 100%;
+    background-color: #f9f9fc ;
+    display: flex;
+    flex-direction: column;
+}
+.select{
+    justify-content: center;
+    align-items: center!important;
+    
+    
+}
+.primary-select{
+    margin: 2rem;
+    outline: none;
+    border: none;
+    border-radius: 0.2rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+}
+.container-checkbox {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    margin-left:2rem;
+    user-select: none;
+}
+
+.container-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.container-checkbox .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+.container-checkbox:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.container-checkbox input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.container-checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.container-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.container-checkbox .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+.close-wrap{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 1rem;
+}
+.close-wrap>button{
+    border: none;
+    background-color: rgba(255, 99, 71, 0.719);
+    color: white;
+}
+.account-image{
+    border-radius: 50%;
+    margin: 1rem 1rem;
+    border:1px solid  rgb(186, 235, 255);
+}
+.account-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    margin: 0px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+   
+    
+}
+.form-action{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.input-group{
+    width: inherit;
+}
+.view-wrap{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    border-top: 2px grey;
+    height: 200px;
+    overflow-y: scroll;
+}
+.rec-wrap{
+    flex: 1;
+    display:flex;
+    height: max-content;
+    flex-direction: column-reverse;
+    
+}
+.sent-wrap{
+    flex: 1;
+    display: flex;
+    height: max-content;
+    flex-direction: column-reverse;
+}
+.sent-wrap::-webkit-scrollbar {
+    display: none;
+    height: 0px;
+    width: 0px;
+  }
+.rec-item{
+    display: flex;
+    justify-content: space-between;
+   margin: 0.1rem 0.3rem;
+   background-color: white;
+    padding: 0.5rem 0;
+    
+}
+.rec-item-head{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    padding: 1rem 0;
+    font-weight: 900;
+    font-size: 0.7rem;
+    background-color: #f9f9fc;
+}
+.rec-no{
+    padding: 0 1rem;
+    color: grey;
+    font-size: 0.8rem;
+    margin: 0 3rem;
+}
+.rec-amount{
+    color: greenyellow;
+    font-weight: 900;
+    font-size: 0.8rem;
+    margin: 0 3rem;
+}
+.sent-amount{
+    color: red;
+    font-weight: 900;
+    font-size: 0.8rem;
+    margin: 0 3rem;
+}
+.view-head{
+    display: flex;
+}
+.transnav-wrap{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(21, 67, 87);
+}
+.transnav-item{
+    padding: 1rem;
+    color: rgb(219, 220, 223);
+    margin-top: 0.2rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+
+}
+.active{
+margin-top: 0.2rem;
+background-color: #f9f9fc;
+color: rgb(7, 23, 31)!important;
+cursor: pointer;
+
+}
+.transaction-search{
+    max-width: 50%;
+}
+.search-wrap{
+    margin: 1rem;
+}
+.passbook-wrap{
+    width: 100%;
+}
+.passbook-item{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0.2rem;
+}
+.passbook-item>.rec-no{
+    width: 25%;
+}
+.head{
+    margin: 2rem;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+.btn-wrap{
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 0.3rem;
+}
+#viewtrans{
+    display: flex;
+    height: max-content;
+}
