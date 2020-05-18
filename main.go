@@ -5,6 +5,7 @@ import (
 	"github.com/vedha98/go_learn/controllers"
 	"github.com/vedha98/go_learn/middlewares"
 	"github.com/vedha98/go_learn/models"
+	"github.com/vedha98/go_learn/services"
 )
 
 func initializeDatabase(r *gin.Engine) {
@@ -33,6 +34,7 @@ func addBookRoutes(r *gin.Engine) {
 func main() {
 	r := gin.Default()
 	initializeDatabase(r)
+	services.InitiateValidators()
 	addUserRoutes(r)
 	addBookRoutes(r)
 	r.Run()

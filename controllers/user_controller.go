@@ -16,7 +16,7 @@ type CreateUserInput struct {
 }
 type LoginUserInput struct {
 	Password string `json:"password" binding:"required"`
-	Email    string `json:"email" binding:"required"`
+	Email    string `json:"email" binding:"required,gmail"`
 }
 
 func CreateUser(c *gin.Context) {
