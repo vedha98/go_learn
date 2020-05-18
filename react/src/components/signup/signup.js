@@ -75,21 +75,21 @@ class signup extends React.Component {
     }
     registerClick = () => {
         var self = this;
-        console.log(this.state)
-        let form = new FormData();
-        form.append("image", this.state.image,this.state.image.name)
-        form.append("firstname",this.state.firstname);
-        form.append("lastname",this.state.lastname);
-        form.append("password",this.state.password);
-        form.append("email",this.state.email);
-        form.append("phone",this.state.phone);
-        form.append("aadharNo",this.state.aadharNo);
-        form.append("panNo",this.state.panNo);
-        form.append("dob",this.state.dob);
-        form.append("nfirstname",this.state.nfirstname);
-        form.append("nlastname",this.state.nlastname);
-        form.append("ndob",this.state.ndob);
-        axios.post('http://localhost:8000/api/users/register',form)
+        // console.log(this.state)
+        // let form = new FormData();
+        // form.append("image", this.state.image,this.state.image.name)
+        // form.append("firstname",this.state.firstname);
+        // form.append("lastname",this.state.lastname);
+        // form.append("password",this.state.password);
+        // form.append("email",this.state.email);
+        // form.append("phone",this.state.phone);
+        // form.append("aadharNo",this.state.aadharNo);
+        // form.append("panNo",this.state.panNo);
+        // form.append("dob",this.state.dob);
+        // form.append("nfirstname",this.state.nfirstname);
+        // form.append("nlastname",this.state.nlastname);
+        // form.append("ndob",this.state.ndob);
+        axios.post('http://localhost:8000/api/users/register',this.state)
             .then(function (response) {
                 console.log(response);
                 if (response.data.success) {

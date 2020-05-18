@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"unsafe"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -10,9 +11,17 @@ import (
 )
 
 type CreateUserInput struct {
-	Name     string `json:"name" binding:"required"`
-	Email    string `json:"email" binding:"required"`
-	Password string `json:"password" binding:"required"`
+	ID         uint   `json:"id" gorm:"primary_key"`
+	Firstname  string `json:"firstname" binding:"required"`
+	Lastname   string `json:"lastname" binding:"required"`
+	NFirstname string `json:"nfirstname" binding:"required"`
+	NLastname  string `json:"nlastname" binding:"required"`
+	Password   string `json:"password" binding:"required"`
+	AadharNo   string `json:"aadharNo" binding:"required"`
+	PanNo      string `json:"panNo" binding:"required"`
+	Email      string `json:"email" binding:"required"`
+	DOB        string `json:"dob" binding:"required"`
+	NDOB       string `json:"ndob" binding:"required"`
 }
 type LoginUserInput struct {
 	Password string `json:"password" binding:"required"`
@@ -23,13 +32,18 @@ func CreateUser(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
 	var input CreateUserInput
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
 		return
 	}
-	user := models.User{Name: input.Name, Email: input.Email, Password: input.Password}
+	user := (*models.User)(unsafe.Pointer(&input))
 	db.Create(&user)
-
-	c.JSON(http.StatusOK, gin.H{"data": user})
+	// data := struct {
+	// 	success bool
+	// 	message string
+	// }{
+	// 	success: true,
+	// 	message: "User Created Successfully"}
+	c.JSON(http.StatusOK, gin.H{"success": true, "msg": "User Created Successfully"})
 }
 func LoginUser(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/vedha98/go_learn/controllers"
 	"github.com/vedha98/go_learn/middlewares"
@@ -17,7 +18,7 @@ func initializeDatabase(r *gin.Engine) {
 }
 
 func addUserRoutes(r *gin.Engine) {
-	r.POST("/users", controllers.CreateUser)
+	r.POST("/api/users/register", controllers.CreateUser)
 	r.POST("/login", controllers.LoginUser)
 }
 
@@ -35,7 +36,10 @@ func main() {
 	r := gin.Default()
 	initializeDatabase(r)
 	services.InitiateValidators()
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"http://localhost:3000"},
+	}))
 	addUserRoutes(r)
 	addBookRoutes(r)
-	r.Run()
+	r.Run(":8000")
 }
