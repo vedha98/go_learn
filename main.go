@@ -21,11 +21,13 @@ func addUserRoutes(r *gin.Engine) {
 }
 
 func addBookRoutes(r *gin.Engine) {
-	r.GET("/books", middlewares.VerifyToken(), controllers.FindBooks)
-	r.POST("/books", middlewares.VerifyToken(), controllers.CreateBook)
-	r.GET("/books/:id", controllers.FindBook)
-	r.PATCH("/books/:id", controllers.UpdateBook)
-	r.DELETE("/books/:id")
+	authorized := r.Group("/")
+	authorized.Use(middlewares.VerifyToken())
+	authorized.GET("/books", controllers.FindBooks)
+	authorized.POST("/books", controllers.CreateBook)
+	authorized.GET("/books/:id", controllers.FindBook)
+	authorized.PATCH("/books/:id", controllers.UpdateBook)
+	authorized.DELETE("/books/:id")
 }
 
 func main() {

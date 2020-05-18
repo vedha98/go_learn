@@ -7,5 +7,5 @@ type Book struct {
 	Title      string `json:"title"`
 	UserID     int
 	User       User       `gorm:"ForeignKey:UserID"`
-	Categories []Category `gorm:"many2many:book_categories"`
+	Categories []Category `json:"-" gorm:"many2many:book_categories"`
 }
