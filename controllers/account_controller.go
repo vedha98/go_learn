@@ -8,7 +8,7 @@ import (
 	"github.com/vedha98/go_learn/models"
 )
 
-type CreateParams struct {
+type createParams struct {
 	IsPrimary bool   `json:"isPrimary"`
 	AccountNo string `json:"AccountNo"`
 }
@@ -22,17 +22,18 @@ type sendMoneyParams struct {
 	Amount int    `binding:"required" json:"amount,string" `
 }
 
+//CreateAccount create a new account for the user
 func CreateAccount(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
-	userId := c.MustGet("userId").(interface{})
+	userID := c.MustGet("userId").(interface{})
 	var user models.User
 
-	err := db.Where("id = ?", userId).First(&user).Error
+	err := db.Where("id = ?", userID).First(&user).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
 		return
 	}
-	var params CreateParams
+	var params createParams
 	if err := c.ShouldBindJSON(&params); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error(), "msg": "invalid details"})
 		return
@@ -43,12 +44,13 @@ func CreateAccount(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"success": true, "accounts": accounts})
 }
 
+//GetAccounts return all accounts of the user
 func GetAccounts(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
-	userId := c.MustGet("userId").(interface{})
+	userID := c.MustGet("userId").(interface{})
 	var user models.User
 
-	err := db.Where("id = ?", userId).First(&user).Error
+	err := db.Where("id = ?", userID).First(&user).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
 		return
@@ -58,12 +60,13 @@ func GetAccounts(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"success": true, "accounts": accounts})
 }
 
+//AddMoney adds money the account
 func AddMoney(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
-	userId := c.MustGet("userId").(interface{})
+	userID := c.MustGet("userId").(interface{})
 	var user models.User
 
-	err := db.Where("id = ?", userId).First(&user).Error
+	err := db.Where("id = ?", userID).First(&user).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
 		return
@@ -74,7 +77,7 @@ func AddMoney(c *gin.Context) {
 		return
 	}
 	account := models.Account{}
-	accerr := db.Where("account_no = ? and user_id=(?)", params.AccountNo, userId).First(&account).Error
+	accerr := db.Where("account_no = ? and user_id=(?)", params.AccountNo, userID).First(&account).Error
 	if accerr != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!", "msg": "Account Not Found"})
 		return
@@ -84,12 +87,13 @@ func AddMoney(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"success": true, "msg": "Money Added Successfully"})
 }
 
+//SendMoney sends money to another account
 func SendMoney(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
-	userId := c.MustGet("userId").(interface{})
+	userID := c.MustGet("userId").(interface{})
 	var user models.User
 
-	err := db.Where("id = ?", userId).First(&user).Error
+	err := db.Where("id = ?", userID).First(&user).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
 		return
@@ -101,7 +105,7 @@ func SendMoney(c *gin.Context) {
 	}
 	fromAccount := models.Account{}
 	toAccount := models.Account{}
-	faccerr := db.Where("account_no = ? and user_id = ?", params.FromNo, userId).First(&fromAccount).Error
+	faccerr := db.Where("account_no = ? and user_id = ?", params.FromNo, userID).First(&fromAccount).Error
 	taccerr := db.Where("account_no = ?", params.ToNo).First(&toAccount).Error
 	if faccerr != nil || taccerr != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!", "msg": "Account Not Found"})
