@@ -5,7 +5,7 @@ export class SideNav extends Component {
         return (
             <div className="side-wrap">
                 <div className="side-item header">
-                    Doogle Pay
+                    Bakoda Bank
                 </div>
                 <div className="side-item account-wrap">
                     

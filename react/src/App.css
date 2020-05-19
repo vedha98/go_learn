@@ -36,7 +36,9 @@
 .App-link {
   color: #61dafb;
 }
-
+.Toastify__toast--success {
+  background-color:  rgb(122,27,43)!important;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

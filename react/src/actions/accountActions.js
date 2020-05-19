@@ -29,7 +29,7 @@ export const addAccount = (accountNo,isPrimary)=> dispatch =>{
     };
     axios.post('http://localhost:8000/api/accounts/createacc', {
             accountNo,
-            isPrimary
+            isPrimary:+isPrimary
         },config).then(res=>{
             if(res.data.success){
                 toast.success("account added successfully",{position: toast.POSITION.BOTTOM_RIGHT});

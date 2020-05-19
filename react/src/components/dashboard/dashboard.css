@@ -11,7 +11,6 @@
     width: 20%;
     background-color: rgba(0, 255, 8, 0.088);
     background-image: url("/bg.jpg");
-    background-blend-mode: color-dodge;
     background-attachment: fixed;
     background-size: contain;
     height: 100%;
@@ -39,11 +38,12 @@
 }
 
 .header{
-    padding: 1rem;
-    font-size: 0.8rem;
+    padding: 1.5rem 1rem;
+    font-size: 1.5rem;
     color: white;
     border-radius: 0;
     margin: 0;
+    background-color: rgb(122,27,43);
     font-weight: 900;
 
 }
@@ -306,17 +306,15 @@ border-radius: 0.2rem;
     background-color:rgb(122,27,43)
 }
 .transnav-item{
-    padding: 1rem;
+    padding:1.85rem 3rem;
     color: rgb(219, 220, 223);
-    margin-top: 0.2rem;
     cursor: pointer;
     font-size: 0.8rem;
 
 }
 .active{
-margin-top: 0.2rem;
-background-color: #f9f9fc;
-color: rgb(7, 23, 31)!important;
+background-color:rgba(252, 81, 59, 0.258);
+color:white!important;
 cursor: pointer;
 
 }
