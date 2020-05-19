@@ -86,7 +86,12 @@ class dashboard extends React.Component {
 
                 
             }
-        )
+        ).catch(err=>{
+            toast.error("login expired")
+            this.props.history.push('/login', {
+                position: toast.POSITION.BOTTOM_RIGHT
+              })
+        })
     }
 }
 const mapStateToProps = (state)=>{

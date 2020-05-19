@@ -8,17 +8,18 @@ import (
 
 type User struct {
 	// gorm.Model
-	ID         uint   `json:"id" gorm:"primary_key"`
-	Firstname  string `json:"firstname"`
-	Lastname   string `json:"lastname"`
-	NFirstname string `json:"nfirstname"`
-	NLastname  string `json:"nlastname"`
-	Password   string `json:"-"`
-	AadharNo   string `json:"aadharNo"`
-	PanNo      string `json:"panNo"`
-	Email      string `json:"email"`
-	DOB        string `json:"dob"`
-	NDOB       string `json:"ndob"`
+	ID         uint      `json:"id" gorm:"primary_key"`
+	Firstname  string    `json:"firstname"`
+	Lastname   string    `json:"lastname"`
+	NFirstname string    `json:"nfirstname"`
+	NLastname  string    `json:"nlastname"`
+	Password   string    `json:"-"`
+	AadharNo   string    `json:"aadharNo"`
+	PanNo      string    `json:"panNo"`
+	Email      string    `json:"email"`
+	DOB        string    `json:"dob"`
+	NDOB       string    `json:"ndob"`
+	Accounts   []Account `json:"accounts"`
 }
 
 func Hash(password string) ([]byte, error) {

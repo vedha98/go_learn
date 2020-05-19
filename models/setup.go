@@ -13,7 +13,7 @@ func SetupModels() *gorm.DB {
 	// db.DB().SetMaxIdleConns(0)
 	db.DB().SetMaxOpenConns(100)
 	// db.LogMode(true)
-	db.AutoMigrate(&User{}, &Book{}, &Category{})
+	db.AutoMigrate(&User{}, &Book{}, &Category{}, &Account{})
 
 	return db
 }

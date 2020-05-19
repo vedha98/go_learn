@@ -5,14 +5,11 @@ export class SideNav extends Component {
         return (
             <div className="side-wrap">
                 <div className="side-item header">
-                    Online Banking
-                </div>
-                <div className="side-item ">
-                    Overview
+                    Doogle Pay
                 </div>
                 <div className="side-item account-wrap">
                     
-                        <img className="account-image" height="50px" width="50px"  src={this.props.user.image}></img>
+                        <img className="account-image" height="50px" width="50px"  src={process.env.PUBLIC_URL + 'user.png'}></img>
         <h3>{this.props.user.firstname}</h3>
                 </div>
             </div>

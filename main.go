@@ -22,7 +22,11 @@ func addUserRoutes(r *gin.Engine) {
 	r.POST("/api/users/login", controllers.LoginUser)
 	r.GET("/api/users/tokenlogin", middlewares.VerifyToken(), controllers.TokenLogin)
 }
-
+func addAccountRoutes(r *gin.Engine) {
+	r.POST("/api/accounts/createacc", middlewares.VerifyToken(), controllers.CreateAccount)
+	r.POST("/api/transfer/addmoney", middlewares.VerifyToken(), controllers.AddMoney)
+	r.GET("/api/accounts/getaccounts", middlewares.VerifyToken(), controllers.GetAccounts)
+}
 func addBookRoutes(r *gin.Engine) {
 	authorized := r.Group("/")
 	authorized.Use(middlewares.VerifyToken())
@@ -40,7 +44,9 @@ func main() {
 	r.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"http://localhost:3000"},
 	}))
+	r.Use(middlewares.BodyLogMiddleware())
 	addUserRoutes(r)
 	addBookRoutes(r)
+	addAccountRoutes(r)
 	r.Run(":8000")
 }
