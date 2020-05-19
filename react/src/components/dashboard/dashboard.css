@@ -12,7 +12,8 @@
     background-color: rgba(0, 255, 8, 0.088);
     background-image: url("/bg.jpg");
     background-attachment: fixed;
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -43,7 +44,7 @@
     color: white;
     border-radius: 0;
     margin: 0;
-    background-color: rgb(122,27,43);
+    background-color: rgb(137,4,47);
     font-weight: 900;
 
 }
@@ -74,9 +75,10 @@
 	background-color: #F5F5F5;
 }
 .account-card{
-    margin: 0.5rem 1rem;
-    padding: 0.5rem 1rem;
-    background-color: white;
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+    background-color: #fbf8f6;
+    border: solid 0.5px #89042F;
     min-width: 200px;
     border-radius: 0.2rem;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -114,19 +116,19 @@ border-radius: 0.2rem;
     font-size: 0.7rem;
 }
 .add-btn{
-    border: solid 1px rgb(122,27,43) ;
+    border: solid 1px rgb(137,4,47);
     outline: none;
     border-radius: 0.3rem;
     font-size: 0.8rem;
     padding: 0.5rem;
-    color: rgb(122,27,43);
+    color: rgb(137,4,47);
     background-color: #f9f9fc;
 
     margin: 0.1rem 1rem;
     cursor: pointer;
 }
 .add-btn:hover{
-    background-color: rgb(122,27,43);
+    background-color: rgb(137,4,47);
     color: white;
 }
 .addAccount-wrap{
@@ -291,7 +293,7 @@ border-radius: 0.2rem;
     margin: 0 3rem;
 }
 .sent-amount{
-    color: rgb(122,27,43);
+    color: rgb(137,4,47);
     font-weight: 900;
     font-size: 0.8rem;
     margin: 0 3rem;
@@ -303,7 +305,7 @@ border-radius: 0.2rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    background-color:rgb(122,27,43)
+    background-color:rgb(137,4,47)
 }
 .transnav-item{
     padding:1.85rem 3rem;
@@ -319,10 +321,22 @@ cursor: pointer;
 
 }
 .transaction-search{
-    max-width: 50%;
+    max-width: 30%;
 }
 .search-wrap{
     margin: 1rem;
+    display: flex;
+    position: relative;
+    flex-direction: row-reverse;
+    /* justify-content: center; */
+    align-items: center;
+}
+.search-icon{
+    background-color: #89042F;
+    padding: 1.1rem;
+    margin-left: -4px;
+
+    
 }
 .passbook-wrap{
     width: 100%;
