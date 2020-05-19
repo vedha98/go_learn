@@ -26,7 +26,7 @@ class login extends React.Component {
             var self = this;
             //send post req
             axios.post('http://localhost:8000/api/users/login', {
-                id: this.state.id,
+                email: this.state.id,
                 password: this.state.Password
             })
                 .then(function (response) {

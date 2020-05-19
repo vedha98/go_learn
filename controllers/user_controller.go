@@ -54,7 +54,7 @@ func LoginUser(c *gin.Context) {
 	}
 	var user = models.User{}
 	if err := db.Where("email = ?", input.Email).First(&user).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found!"})
+		c.JSON(http.StatusBadRequest, gin.H{"msg": "User not found!"})
 		return
 	}
 	paswordMatch := user.VerifyPassword(input.Password)
@@ -64,7 +64,20 @@ func LoginUser(c *gin.Context) {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "Unable to Generate JWT!"})
 			return
 		}
-		c.JSON(http.StatusOK, gin.H{"user": user, "token": token})
+		c.JSON(http.StatusOK, gin.H{"user": user, "token": token, "success": true})
 	}
 
+}
+
+func TokenLogin(c *gin.Context) {
+	db := c.MustGet("db").(*gorm.DB)
+	userId := c.MustGet("userId").(interface{})
+	var user models.User
+
+	err := db.Where("id = ?", userId).First(&user).Error
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"msg": "User not found!"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"user": user, "success": true, "msg": "Logged In Successfully"})
 }

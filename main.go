@@ -19,7 +19,8 @@ func initializeDatabase(r *gin.Engine) {
 
 func addUserRoutes(r *gin.Engine) {
 	r.POST("/api/users/register", controllers.CreateUser)
-	r.POST("/login", controllers.LoginUser)
+	r.POST("/api/users/login", controllers.LoginUser)
+	r.GET("/api/users/tokenlogin", middlewares.VerifyToken(), controllers.TokenLogin)
 }
 
 func addBookRoutes(r *gin.Engine) {
