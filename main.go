@@ -25,7 +25,9 @@ func addUserRoutes(r *gin.Engine) {
 func addAccountRoutes(r *gin.Engine) {
 	r.POST("/api/accounts/createacc", middlewares.VerifyToken(), controllers.CreateAccount)
 	r.POST("/api/transfer/addmoney", middlewares.VerifyToken(), controllers.AddMoney)
+	r.POST("/api/transfer/sendmoney", middlewares.VerifyToken(), controllers.SendMoney)
 	r.GET("/api/accounts/getaccounts", middlewares.VerifyToken(), controllers.GetAccounts)
+
 }
 func addBookRoutes(r *gin.Engine) {
 	authorized := r.Group("/")

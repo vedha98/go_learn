@@ -1,5 +1,6 @@
 export const GET_ACCOUNTS = 'GET_ACCOUNTS';
 export const LOAD_ACCOUNTS='LOAD_ACCOUNTS';
+export const REFRESH_ACCOUNTS='LOAD_ACCOUNTS';
 export const SEND_MONEY='SEND_MONEY';
 export const ADD_MONEY='ADD_MONEY';
 export const ADD_ACCOUNT = 'ADD_ACCOUNT';

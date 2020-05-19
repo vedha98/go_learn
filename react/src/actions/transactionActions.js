@@ -1,4 +1,4 @@
-import { GET_TRANSACTIONS, SEND_MONEY, ADD_MONEY, FILTER_TRANSACTIONS,GET_PASSBOOK } from '../actions/types';
+import { GET_TRANSACTIONS, SEND_MONEY, ADD_MONEY, FILTER_TRANSACTIONS,GET_PASSBOOK, LOAD_ACCOUNTS, GET_ACCOUNTS } from '../actions/types';
 import {toast} from 'react-toastify'
 import axios from 'axios';
 
@@ -25,14 +25,19 @@ export const sendmoney = (fromno,tono,amount)=> dispatch =>{
             if(res.data.success){
                 toast.success(res.data.msg,{position: toast.POSITION.BOTTOM_RIGHT});
                 dispatch({
-                    type:SEND_MONEY,payload:res.data.transaction
-                  })
+                  type:LOAD_ACCOUNTS,payload:res.data.accounts
+                })
+                // dispatch({
+                //     type:SEND_MONEY,payload:res.data.transaction
+                //   })
             }else{
                 toast.error(res.data.msg,{position: toast.POSITION.BOTTOM_RIGHT});
             }
    
 }
-  )
+  ).catch(err=>{
+    toast.error(err.response.data.msg,{position: toast.POSITION.BOTTOM_RIGHT});
+  })
   }
   export const addmoney = (accno,amount)=> dispatch =>{
     console.log('get called');
