@@ -6,7 +6,7 @@ export class Passbook extends Component {
         var col = ["s/n ", "fromno", "to No", "Amount", "Date"];
         var rows = [];
         this.props.passbook.forEach((element, i) => {
-            var temp = [i, element.fromno, element.tono, element.amount, new Date(element.createdAt).toDateString()];
+            var temp = [i, element.fromno, element.tono, element.amount, new Date(element.CreatedAt).toDateString()];
             rows.push(temp);
 
         });
@@ -50,7 +50,7 @@ export class Passbook extends Component {
                             {val.amount}
                         </div>
                         <div className="rec-no">
-                            {new Date(val.createdAt).toDateString()}
+                            {new Date(val.CreatedAt).toDateString()}
                         </div>
                     </div>
                 )}

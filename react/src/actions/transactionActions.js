@@ -5,13 +5,13 @@ import axios from 'axios';
 toast.configure({position: toast.POSITION.BOTTOM_RIGHT})
 export const gettransactions = (pageno=0)=> dispatch =>{
   console.log('get called');
-  let url = 'http://localhost:8000/api/transfer/gettransactions/?page='+pageno
+  let url = 'http://localhost:8000/api/transfer/gettransactions/'+pageno
        let config = {
         headers: {'Authorization': "bearer " + localStorage.getItem("token")}
     };
         axios.get(url,config).then(res=>
   dispatch({
-    type:GET_TRANSACTIONS,payload:res.data,pageno
+    type:GET_TRANSACTIONS,payload:{val: res.data},pageno
   })
 )
 }
@@ -27,16 +27,18 @@ export const sendmoney = (fromno,tono,amount)=> dispatch =>{
                 dispatch({
                   type:LOAD_ACCOUNTS,payload:res.data.accounts
                 })
-                // dispatch({
-                //     type:SEND_MONEY,payload:res.data.transaction
-                //   })
+                dispatch({
+                    type:SEND_MONEY,payload:res.data.transaction
+                  })
             }else{
                 toast.error(res.data.msg,{position: toast.POSITION.BOTTOM_RIGHT});
             }
    
 }
   ).catch(err=>{
-    toast.error(err.response.data.msg,{position: toast.POSITION.BOTTOM_RIGHT});
+    if(err.response){
+      toast.error(err.response.data.msg,{position: toast.POSITION.BOTTOM_RIGHT});
+    }
   })
   }
   export const addmoney = (accno,amount)=> dispatch =>{

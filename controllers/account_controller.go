@@ -109,6 +109,7 @@ func SendMoney(c *gin.Context) {
 	}
 	fromAccount := models.Account{}
 	toAccount := models.Account{}
+	transaction := models.Transaction{}
 	faccerr := db.Where("account_no = ? and user_id = ?", params.FromNo, userID).First(&fromAccount).Error
 	taccerr := db.Where("account_no = ?", params.ToNo).First(&toAccount).Error
 	if faccerr != nil || taccerr != nil {
@@ -120,11 +121,17 @@ func SendMoney(c *gin.Context) {
 		db.Save(&fromAccount)
 		toAccount.Balance += params.Amount
 		db.Save(&toAccount)
+		transaction.FromAccount = fromAccount
+		transaction.ToAccount = toAccount
+		transaction.FromNo = params.FromNo
+		transaction.ToNo = params.ToNo
+		transaction.Amount = params.Amount
+		db.Save(&transaction)
 	} else {
 		c.JSON(http.StatusBadRequest, gin.H{"msg": "Not Enough Balance"})
 		return
 	}
 	accounts := []models.Account{}
 	db.Model(&user).Related(&accounts)
-	c.JSON(http.StatusOK, gin.H{"success": true, "accounts": accounts, "msg": "Money Sent Successfully"})
+	c.JSON(http.StatusOK, gin.H{"success": true, "accounts": accounts, "transaction": transaction, "msg": "Money Sent Successfully"})
 }

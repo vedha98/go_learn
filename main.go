@@ -18,6 +18,7 @@ func addAccountRoutes(r *gin.Engine) {
 	r.POST("/api/accounts/createacc", middlewares.VerifyToken(), controllers.CreateAccount)
 	r.POST("/api/transfer/addmoney", middlewares.VerifyToken(), controllers.AddMoney)
 	r.POST("/api/transfer/sendmoney", middlewares.VerifyToken(), controllers.SendMoney)
+	r.GET("/api/transfer/gettransactions/:page", middlewares.VerifyToken(), controllers.GetTransactions)
 	r.GET("/api/accounts/getaccounts", middlewares.VerifyToken(), controllers.GetAccounts)
 
 }

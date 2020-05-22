@@ -9,7 +9,7 @@ export class ViewTransactions extends Component {
     }
     
     render() {
-        return (<div >
+        return (<div className="trans-wrap" >
             <div className="view-head">
                 <div id="rec-head" className="rec-item-head">transactions from</div>
                 <div id="sent-head" className="rec-item-head">transactions to</div>
@@ -21,7 +21,7 @@ export class ViewTransactions extends Component {
                     {this.props.recieved.map((val, i) =>
                         <div key={i} className="rec-item">
                             <div className="rec-no">
-                                {val.id}
+                                {new Date(val.CreatedAt).toDateString()}
                             </div>
                             <div className="rec-no">
                                 {val.fromno}
@@ -37,7 +37,7 @@ export class ViewTransactions extends Component {
                     {this.props.sent.map((val, i) =>
                         <div key={i} className="rec-item">
                             <div className="rec-no">
-                                {val.id}
+                                {new Date(val.CreatedAt).toDateString()}
                             </div>
                             <div className="rec-no">
                                 {val.tono}

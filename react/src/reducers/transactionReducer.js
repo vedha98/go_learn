@@ -50,8 +50,8 @@ export default (state = initialState, action) => {
                 return(String(action.payload)===val.fromno||String(action.payload)===val.tono)
             })
             combined.sort(function(a, b) {
-                a = new Date(a.createdAt);
-                b = new Date(b.createdAt);
+                a = new Date(a.CreatedAt);
+                b = new Date(b.CreatedAt);
                 return a>b ? -1 : a<b ? 1 : 0;
             });
             return{...state,passbook:combined}                 
